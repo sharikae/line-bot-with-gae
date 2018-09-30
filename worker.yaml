@@ -1,0 +1,22 @@
+runtime: python27
+version: dev01
+api_version: 1
+threadsafe: true
+module: worker
+
+handlers:
+- url: /tasks/receive
+  script: worker.app
+  login: admin
+
+- url: /tasks/parse
+  script: worker.app
+  login: admin
+
+- url: /tasks/generate
+  script: kaoris.messaging_handler.app
+  login: admin
+
+libraries:
+- name: ssl
+  version: latest
